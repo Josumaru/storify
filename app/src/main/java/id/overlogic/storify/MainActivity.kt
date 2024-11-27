@@ -1,0 +1,41 @@
+package id.overlogic.storify
+
+import android.content.Intent
+import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.viewModels
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
+import id.overlogic.storify.databinding.ActivityMainBinding
+import id.overlogic.storify.ui.auth.login.LoginActivity
+import id.overlogic.storify.ui.common.factory.ViewModelFactory
+
+class MainActivity : AppCompatActivity() {
+    private val viewModel by viewModels<MainViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
+    private lateinit var binding: ActivityMainBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.getSession().observe(this) { user ->
+            if (!user.isLogin) {
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finish()
+            } else {
+                binding = ActivityMainBinding.inflate(layoutInflater)
+                setContentView(binding.root)
+
+                val navView: BottomNavigationView = binding.navView
+
+                val navController = findNavController(R.id.nav_host_fragment_activity_main)
+
+                navView.setupWithNavController(navController)
+            }
+        }
+    }
+}

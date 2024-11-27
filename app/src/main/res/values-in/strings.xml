@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cerita</string>
+    <string name="title_home">Rumah</string>
+    <string name="title_dashboard">Dashbor</string>
+    <string name="title_notifications">Notifikasi</string>
+    <string name="title_profile">Profil</string>
+    <string name="from_overlogic_id">dari Overlogic ID</string>
+    <string name="login">Masuk</string>
+    <string name="don_t_have_an_account">Gak punya akun?</string>
+    <string name="welcome_back">Selamat datang Kembali</string>
+    <string name="sign_up">Daftar</string>
+    <string name="example_overlogic_id">contoh@overlogic.id</string>
+    <string name="hint_password">••••••••</string>
+    <string name="create_new_account">Buat Akun Baru</string>
+    <string name="name">Nama</string>
+    <string name="password">Kata Sandi</string>
+    <string name="sign_in">Masuk</string>
+    <string name="already_have_an_account">Sudah Punya Akun</string>
+    <string name="register">Mendaftar</string>
+    <string name="email">Surat Elektronik</string>
+    <string name="josumaru">Josumaru</string>
+    <string name="password_must_be_at_least_8_characters">Pasword setidaknya harus 8 karakter</string>
+    <string name="email_is_not_valid">Alamat Email tidak valid</string>
+    <string name="title_create">Buat</string>
+    <string name="desc_story_cover">Kover Cerita</string>
+    <string name="desc_back">Balik</string>
+    <string name="details">Detil</string>
+    <string name="desc_image_cover">Gambar Kover</string>
+    <string name="camera">Kamera</string>
+    <string name="gallery">Galeri</string>
+    <string name="upload">Unggah</string>
+    <string name="description">Deskripsi</string>
+    <string name="log_out">Keluar</string>
+    <string name="loading">Memuat</string>
+</resources>
