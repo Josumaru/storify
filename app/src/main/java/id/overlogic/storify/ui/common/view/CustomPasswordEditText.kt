@@ -1,7 +1,6 @@
 package id.overlogic.storify.ui.common.view
 
 import android.content.Context
-import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.InputType

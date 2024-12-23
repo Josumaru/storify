@@ -32,4 +32,20 @@
     <string name="description">Description</string>
     <string name="log_out">Log Out</string>
     <string name="loading">Loading</string>
+    <string name="unexpected_error_occurred">Unexpected error occurred</string>
+    <string name="failed_to_refresh">Failed to refresh</string>
+    <string name="error">Error</string>
+    <string name="ok">OK</string>
+    <string name="map">Map</string>
+    <string name="retry">Retry</string>
+    <string name="use_location">Use Location</string>
+    <string name="converting">Converting...</string>
+    <string name="please_insert_a_description">Please insert a description</string>
+    <string name="uploading">Uploading...</string>
+    <string name="error_creating_image_file">Error creating image file</string>
+    <string name="no_image_selected">No image selected</string>
+    <string name="failed_to_process_image">Failed to process image</string>
+    <string name="failed_to_capture_image">Failed to capture image</string>
+    <string name="permission_not_granted">Permission not granted</string>
+    <string name="location_is_not_found_try_again">Location is not found. Try Again</string>
 </resources>

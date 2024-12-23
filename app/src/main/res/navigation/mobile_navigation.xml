@@ -20,5 +20,10 @@
         android:name="id.overlogic.storify.ui.create.CreateFragment"
         android:label="fragment_create"
         tools:layout="@layout/fragment_create" />
+    <fragment
+        android:id="@+id/navigation_map"
+        android:name="id.overlogic.storify.ui.map.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" />
 
 </navigation>

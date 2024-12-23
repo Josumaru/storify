@@ -8,6 +8,7 @@ import id.overlogic.storify.data.source.remote.response.UploadResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -22,21 +23,26 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("register")
-    fun register(
+    suspend fun register(
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String
-    ): Call<RegisterResponse>
+    ): Response<RegisterResponse>
 
     @FormUrlEncoded
     @POST("login")
-    fun login(
+    suspend fun login(
         @Field("email") email: String,
         @Field("password") password: String
-    ): Call<LoginResponse>
+    ): Response<LoginResponse>
 
     @GET("stories")
-    fun getStories(): Call<StoryResponse>
+    suspend fun getStories(
+        @Query("location") location: Int,
+        @Query("page") page: Int? = null,
+        @Query("size") size: Int? = null
+    ): Response<StoryResponse>
+
 
     @GET("stories/{id}")
     fun getDetail(
@@ -48,5 +54,7 @@ interface ApiService {
     fun uploadStory(
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody,
+        @Part("lat") lat: Double? = null,
+        @Part("lon") lon: Double? = null
     ): Call<UploadResponse>
 }

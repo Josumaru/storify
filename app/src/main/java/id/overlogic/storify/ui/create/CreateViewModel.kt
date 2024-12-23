@@ -24,6 +24,26 @@ class CreateViewModel(private val storyRepository: StoryRepository) : ViewModel(
     private val _upload = MutableLiveData<UploadResponse>()
     val upload: LiveData<UploadResponse> = _upload
 
+    private val _isChecked = MutableLiveData<Boolean>()
+    val isChecked: LiveData<Boolean> = _isChecked
+
+    fun setChecked(isChecked: Boolean) {
+        _isChecked.value = isChecked
+    }
+
+    private val _lat = MutableLiveData<Double?>()
+    val lat: LiveData<Double?> = _lat
+
+    private val _lon = MutableLiveData<Double?>()
+    val lon: LiveData<Double?> = _lon
+
+    fun setLat(lat: Double?) {
+        _lat.value = lat
+    }
+
+    fun setLon(lon: Double?) {
+        _lon.value = lon
+    }
 
     fun setUri(uri: Uri) {
         _uri.value = uri
@@ -31,7 +51,11 @@ class CreateViewModel(private val storyRepository: StoryRepository) : ViewModel(
 
     fun uploadStory(file: MultipartBody.Part, description: RequestBody) {
         _isLoading.value = true
-        storyRepository.uploadStory(file, description).observeForever { result ->
+        if(isChecked.value != true) {
+            setLat(null)
+            setLon(null)
+        }
+        storyRepository.uploadStory(file, description, lat.value, lon.value).observeForever { result ->
             if(result != null){
                 when(result){
                     is Result.Loading -> {

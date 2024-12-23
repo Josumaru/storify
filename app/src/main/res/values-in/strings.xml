@@ -33,4 +33,10 @@
     <string name="description">Deskripsi</string>
     <string name="log_out">Keluar</string>
     <string name="loading">Memuat</string>
+    <string name="unexpected_error_occurred">Error</string>
+    <string name="failed_to_refresh">Gagal Refresh</string>
+    <string name="error">Gagal</string>
+    <string name="ok">Baik</string>
+    <string name="map">Peta</string>
+    <string name="retry">Coba Lagi</string>
 </resources>

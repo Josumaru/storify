@@ -2,9 +2,8 @@ package id.overlogic.storify.ui.auth.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -24,7 +23,6 @@ class LoginActivity : AppCompatActivity() {
     private val viewModel get() = _viewModel!!
     private var email: String = ""
     private var password: String = ""
-    private var isAlertShown = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,42 +59,39 @@ class LoginActivity : AppCompatActivity() {
 
         }
 
-
-        viewModel.error.observe(this) { error ->
-            if (!isAlertShown && error != "") {
-                isAlertShown = true
-                AlertDialog.Builder(this)
-                    .setTitle("Error")
-                    .setMessage(error)
-                    .setPositiveButton("OK") { dialog, _ ->
-                        isAlertShown = false
-                        binding.btnLogin.text = getString(R.string.login)
-                        dialog.dismiss()
+        viewModel.result.observe(this) { result ->
+            if (result != null) {
+                when (result) {
+                    is Result.Loading -> {
+                        binding.btnLogin.isEnabled = false
+                        binding.btnLogin.text = getString(R.string.loading)
                     }
-                    .create()
-                    .show()
+
+                    is Result.Success -> {
+                        binding.btnLogin.text = getString(R.string.login)
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+
+                    is Result.Error -> {
+                        binding.btnLogin.text = getString(R.string.login)
+                        binding.btnLogin.isEnabled = true
+                        Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
-        }
 
-        viewModel.loading.observe(this) { loading ->
-            binding.btnLogin.isEnabled = !loading
-            binding.btnLogin.text = if (loading) "${getString(R.string.loading)}..." else getString(R.string.loading)
-        }
-
-        viewModel.loginResult.observe(this) { _ ->
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags =
-                Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-            finish()
         }
     }
+
     private fun updateLoginButtonState() {
         binding.btnLogin.isEnabled = validateInput()
     }
 
     private fun validateInput(): Boolean {
-        val isEmailValid = email.isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        val isEmailValid =
+            email.isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
         val isPasswordValid = password.isNotEmpty() && password.length >= 8
         return isEmailValid && isPasswordValid
     }
